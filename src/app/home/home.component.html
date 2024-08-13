@@ -1,0 +1,42 @@
+<section>
+
+
+  <div class="container">
+  <div class="w-50 m-auto text-white fw-bold mt-5 position-sticky top-0 z-3 text-bg-warning p-3 rounded-4">
+    <label for="product" class="d-flex justify-content-center pb-2 text-black fw-bolder">Categories</label>
+
+    <select id="product" class="form-control" (change)="getSelect($event)" >
+      <option value='all' >ALL Products</option>
+     @for (select of selected; track $index) {
+      <option value="{{select}}">{{select}}</option>
+
+     }
+    </select>
+  </div>
+    <div class="row mt-5 g-2" *ngIf="!spinnerBool">
+
+  @for (product of dataAPI; track $index) {
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="card h-100">
+            <img [src]="product.image" class="w-100 img-thumbnail" style="height: 30.25rem;" alt="...">
+            <div class="card-body position-relative mb-3">
+              <h5 class="card-title">{{product.title}}</h5>
+              <p class="card-text">{{product.description.split(" " , 15).join(" ")}}</p>
+              <div class="d-flex justify-content-between position-absolute bottom-0 start-0 end-0 px-3">
+                <span class="text-bg-success text-center rounded-5 align-items-center pb-1">rate : {{product.rating.rate}}</span>
+                <span class="text-bg-danger text-center rounded-5 align-items-center pb-1">price : {{product.price}}</span>
+              </div>
+            </div>
+
+          </div>
+            </div>
+        }
+
+    </div>
+
+  </div>
+    <div *ngIf="spinnerBool">
+      <app-spinner></app-spinner>
+    </div>
+</section>
+
